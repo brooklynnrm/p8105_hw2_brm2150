@@ -6,36 +6,51 @@ output: html_document
 ---
 This is an R markdown document for the homework assignment #2 for the p8105 Data Science 1 Class.
 
+Load Packages
+
+```{r echo=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
 ## Problem 1
 
 
+## Problem 2
 
+Load Trash Wheel Data from excel.
 
+```{r}
+mr.trashwheel_df = 
+  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N586", na = "") |>
+  janitor::clean_names() |>
+  mutate(sports_balls = round(sports_balls)) |>
+  mutate(sports_balls = as.integer(sports_balls)) |>
+  mutate(year = as.double(year)) |>
+  mutate(trash_wheel = "mr")
 
+mr.trashwheel_df
 
+prof.trashwheel_df =  
+  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M108", na = "") |>
+  janitor::clean_names() |>
+  mutate(trash_wheel = "prof") 
 
+prof.trashwheel_df
 
+gwyn.trashwheel_df = 
+  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", range = "A2:L157", na = "") |>
+  janitor::clean_names() |>
+  mutate(trash_wheel = "gwyn") 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+gwyn.trashwheel_df
+
+trashwheel_df = 
+  bind_rows(mr.trashwheel_df,prof.trashwheel_df, gwyn.trashwheel_df)
+
+trashwheel_df
 ```
 
-## R Markdown
+## Problem 3
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
