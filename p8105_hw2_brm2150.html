@@ -365,7 +365,8 @@ p8105 Data Science 1 Class.</p>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
-<p>Load Trash Wheel Data from excel.</p>
+<p>Load Trash Wheel Data from excel and combine Mr. Trash Wheel,
+Professor Trash Wheel, and Gwynda Trash Wheel.</p>
 <pre class="r"><code>mr.trashwheel_df = 
   read_excel(&quot;data/202309 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Mr. Trash Wheel&quot;, range = &quot;A2:N586&quot;, na = &quot;&quot;) |&gt;
   janitor::clean_names() |&gt;
@@ -459,6 +460,11 @@ trashwheel_df</code></pre>
 ## # ℹ 9 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, plastic_bags &lt;dbl&gt;,
 ## #   wrappers &lt;dbl&gt;, sports_balls &lt;int&gt;, homes_powered &lt;dbl&gt;, trash_wheel &lt;chr&gt;</code></pre>
+<p>The trash wheel in these 3 locations collected on average 2296
+plastic bottles per dumpster. The trash wheel data were collected
+between 2014, 2023. Professor Trash Wheel collected a total weight of
+216.26 tons of trash. The total number of cigarette butts that was
+collected by Gwynda in June of 2022 was 1.812^{4}.</p>
 </div>
 <div id="problem-3" class="section level2">
 <h2>Problem 3</h2>
