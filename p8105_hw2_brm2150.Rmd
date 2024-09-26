@@ -8,7 +8,7 @@ This is an R markdown document for the homework assignment #2 for the p8105 Data
 
 Load Packages
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
