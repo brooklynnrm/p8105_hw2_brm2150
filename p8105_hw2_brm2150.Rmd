@@ -55,4 +55,35 @@ The trash wheel in these 3 locations collected on average `r trashwheel_df |> pu
 
 ## Problem 3
 
+Importing and wrangling the data sets from the Great British Bakeoff show.
+
+```{r}
+bakers_df =
+  read_csv("data/bakers.csv") |>
+  janitor::clean_names() |>
+  separate(baker_name, into = c("baker", "last_name"), sep = " ") |>
+  select(-last_name)
+
+bakers_df
+
+bakes_df = 
+  read_csv("data/bakes.csv", na = "N/A") |>
+  janitor::clean_names() |>
+  select(c(baker, signature_bake, show_stopper))
+
+bakes_df
+
+results_df = 
+  read_csv("data/results.csv", skip = 2, na = "NA") |>
+  janitor::clean_names() |>
+  select(c(baker, technical, result))
+
+results_df
+
+gbb_df = 
+  left_join(bakes_df, bakers_df, by = "baker") |>
+  left_join(gbb_df, results_df, by = "baker")
+#gbb_df =
+  select(gbb_df, c(baker_age, baker_occupation, hometown, baker, episode, signature_bake, show_stopper))
+```
 
