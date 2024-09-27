@@ -4,6 +4,7 @@ author: "Brooklynn McNeil"
 date: "2024-09-24"
 output: html_document
 ---
+
 This is an R markdown document for the homework assignment #2 for the p8105 Data Science 1 Class.
 
 Load Packages
@@ -14,7 +15,6 @@ library(readxl)
 ```
 
 ## Problem 1
-
 
 ## Problem 2
 
@@ -51,11 +51,20 @@ trashwheel_df =
 trashwheel_df
 ```
 
-The trash wheel in these 3 locations collected on average `r trashwheel_df |> pull(plastic_bottles) |> mean(na.rm = TRUE) |> round()` plastic bottles per dumpster. The trash wheel data were collected between `r trashwheel_df |> pull(year) |> range()`. Professor Trash Wheel collected a total weight of `r trashwheel_df|>filter(trash_wheel == "prof")|> pull(weight_tons) |> sum()` tons of trash. The total number of cigarette butts that was collected by Gwynda in June of 2022 was `r trashwheel_df |> filter(trash_wheel == "gwyn", month == "June", year == "2022") |> pull(cigarette_butts) |> sum()`. 
+The trash wheel in these 3 locations collected on average `r trashwheel_df |> pull(plastic_bottles) |> mean(na.rm = TRUE) |> round()` plastic bottles per dumpster. The trash wheel data were collected between `r trashwheel_df |> pull(year) |> range()`. Professor Trash Wheel collected a total weight of `r trashwheel_df|>filter(trash_wheel == "prof")|> pull(weight_tons) |> sum()` tons of trash. The total number of cigarette butts that was collected by Gwynda in June of 2022 was `r trashwheel_df |> filter(trash_wheel == "gwyn", month == "June", year == "2022") |> pull(cigarette_butts) |> sum()`.
 
 ## Problem 3
 
-Importing and wrangling the data sets from the Great British Bakeoff show.
+Importing and wrangling the data sets from the Great British Bakeoff show. To create the combined data set I took the following steps:
+
+1.  `read_csv` to import the data.
+    1.  some data sets needed `nas` to be specified.
+    2.  some data sets needed rows skipped at the beginning of the file.
+2.  `clean_names` to transform all of the variable names to snake case.
+3.  In `bakers_df` the `baker_name` variable needed to have the last name removed so it could be used to join with the , so I used `separate` and `select` to remove the last name.
+4.  I selected only the unique columns in `bakes_df` and `results_df` so that it didn't cause issues when joining the data sets together.
+5.  I then created a new data frame `gbb_df` that joined together the 3 data sets using the `left_join` function.
+6.  I used `tidyverse` and the `pipe` function to achieve this data wrangling.
 
 ```{r}
 bakers_df =
@@ -76,14 +85,17 @@ bakes_df
 results_df = 
   read_csv("data/results.csv", skip = 2, na = "NA") |>
   janitor::clean_names() |>
-  select(c(baker, technical, result))
+  select(c(baker, technical, result, episode))
 
 results_df
 
 gbb_df = 
   left_join(bakes_df, bakers_df, by = "baker") |>
-  left_join(gbb_df, results_df, by = "baker")
-#gbb_df =
-  select(gbb_df, c(baker_age, baker_occupation, hometown, baker, episode, signature_bake, show_stopper))
-```
+  left_join(results_df, by = "baker") |>
+  relocate()
 
+gbb_df
+
+anti_join(bakes_df, bakers_df, by = "baker")
+
+```
