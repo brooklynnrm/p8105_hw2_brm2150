@@ -12,6 +12,7 @@ Load Packages
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(readxl)
+library(gt)
 ```
 
 ## Problem 1
@@ -64,14 +65,15 @@ Importing and wrangling the data sets from the Great British Bakeoff show. To cr
 3.  In `bakers_df` the `baker_name` variable needed to have the last name removed so it could be used to join with the , so I used `separate` and `select` to remove the last name.
 4.  I selected only the unique columns in `bakes_df` and `results_df` so that it didn't cause issues when joining the data sets together.
 5.  I then created a new data frame `gbb_df` that joined together the 3 data sets using the `left_join` function.
-6.  I used `tidyverse` and the `pipe` function to achieve this data wrangling.
+6.  I also found that a few data was missing from the final data frame because it had missing values for all of the variables. This was checked using the `anti-join` function.
+7.  I used `tidyverse` and the `pipe` function to achieve this data wrangling.
 
 ```{r}
 bakers_df =
   read_csv("data/bakers.csv") |>
   janitor::clean_names() |>
   separate(baker_name, into = c("baker", "last_name"), sep = " ") |>
-  select(-last_name)
+  select(-c(last_name,series))
 
 bakers_df
 
@@ -85,17 +87,33 @@ bakes_df
 results_df = 
   read_csv("data/results.csv", skip = 2, na = "NA") |>
   janitor::clean_names() |>
-  select(c(baker, technical, result, episode))
+  select(c(baker, technical, result, episode, series))
 
 results_df
 
 gbb_df = 
   left_join(bakes_df, bakers_df, by = "baker") |>
   left_join(results_df, by = "baker") |>
-  relocate()
+  relocate(series, episode, baker) |>
+  arrange(series)
 
 gbb_df
 
 anti_join(bakes_df, bakers_df, by = "baker")
+anti_join(bakes_df, results_df, by = "baker")
+anti_join(results_df, bakers_df, by = "baker")
+```
 
+Creating a table showing the winner of each episode in Season 5 through 10
+
+```{r}
+results_df |>
+  select(baker, series, episode, technical, result) |>
+  filter(technical == 1, series == 5:10 |>
+  arrange(series, episode) |>
+  gt() |>
+  tab_header(
+    title = "Great British Bakeoff Episode Winners",
+    subtitle = "Episode Winners from Season 5 through 10"
+  )
 ```
