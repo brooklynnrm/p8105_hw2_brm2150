@@ -368,7 +368,7 @@ p8105 Data Science 1 Class.</p>
 <p>Load Trash Wheel Data from excel and combine Mr. Trash Wheel,
 Professor Trash Wheel, and Gwynda Trash Wheel.</p>
 <pre class="r"><code>mr.trashwheel_df = 
-  read_excel(&quot;data/202309 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Mr. Trash Wheel&quot;, range = &quot;A2:N586&quot;, na = &quot;&quot;) |&gt;
+  read_excel(&quot;data/202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Mr. Trash Wheel&quot;, range = &quot;A2:N653&quot;, na = &quot;&quot;) |&gt;
   janitor::clean_names() |&gt;
   mutate(sports_balls = round(sports_balls)) |&gt;
   mutate(sports_balls = as.integer(sports_balls)) |&gt;
@@ -376,7 +376,7 @@ Professor Trash Wheel, and Gwynda Trash Wheel.</p>
   mutate(trash_wheel = &quot;mr&quot;)
 
 mr.trashwheel_df</code></pre>
-<pre><code>## # A tibble: 584 × 15
+<pre><code>## # A tibble: 651 × 15
 ##    dumpster month  year date                weight_tons volume_cubic_yards
 ##       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
 ##  1        1 May    2014 2014-05-16 00:00:00        4.31                 18
@@ -389,17 +389,17 @@ mr.trashwheel_df</code></pre>
 ##  8        8 May    2014 2014-05-28 00:00:00        3.7                  16
 ##  9        9 June   2014 2014-06-05 00:00:00        2.52                 14
 ## 10       10 June   2014 2014-06-11 00:00:00        3.76                 18
-## # ℹ 574 more rows
+## # ℹ 641 more rows
 ## # ℹ 9 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, plastic_bags &lt;dbl&gt;,
 ## #   wrappers &lt;dbl&gt;, sports_balls &lt;int&gt;, homes_powered &lt;dbl&gt;, trash_wheel &lt;chr&gt;</code></pre>
 <pre class="r"><code>prof.trashwheel_df =  
-  read_excel(&quot;data/202309 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Professor Trash Wheel&quot;, range = &quot;A2:M108&quot;, na = &quot;&quot;) |&gt;
+  read_excel(&quot;data/202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Professor Trash Wheel&quot;, range = &quot;A2:M120&quot;, na = &quot;&quot;) |&gt;
   janitor::clean_names() |&gt;
   mutate(trash_wheel = &quot;prof&quot;) 
 
 prof.trashwheel_df</code></pre>
-<pre><code>## # A tibble: 106 × 14
+<pre><code>## # A tibble: 118 × 14
 ##    dumpster month     year date                weight_tons volume_cubic_yards
 ##       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
 ##  1        1 January   2017 2017-01-02 00:00:00        1.79                 15
@@ -412,17 +412,17 @@ prof.trashwheel_df</code></pre>
 ##  8        8 April     2017 2017-04-20 00:00:00        2.37                 15
 ##  9        9 May       2017 2017-05-10 00:00:00        2.64                 15
 ## 10       10 May       2017 2017-05-26 00:00:00        2.78                 15
-## # ℹ 96 more rows
+## # ℹ 108 more rows
 ## # ℹ 8 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, plastic_bags &lt;dbl&gt;,
 ## #   wrappers &lt;dbl&gt;, homes_powered &lt;dbl&gt;, trash_wheel &lt;chr&gt;</code></pre>
 <pre class="r"><code>gwyn.trashwheel_df = 
-  read_excel(&quot;data/202309 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Gwynnda Trash Wheel&quot;, range = &quot;A2:L157&quot;, na = &quot;&quot;) |&gt;
+  read_excel(&quot;data/202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Gwynnda Trash Wheel&quot;, range = &quot;A2:L265&quot;, na = &quot;&quot;) |&gt;
   janitor::clean_names() |&gt;
   mutate(trash_wheel = &quot;gwyn&quot;) 
 
 gwyn.trashwheel_df</code></pre>
-<pre><code>## # A tibble: 155 × 13
+<pre><code>## # A tibble: 263 × 13
 ##    dumpster month   year date                weight_tons volume_cubic_yards
 ##       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
 ##  1        1 July    2021 2021-07-03 00:00:00        0.93                 15
@@ -435,7 +435,7 @@ gwyn.trashwheel_df</code></pre>
 ##  8        8 August  2021 2021-08-16 00:00:00        2.16                 15
 ##  9        9 August  2021 2021-08-16 00:00:00        2.6                  15
 ## 10       10 August  2021 2021-08-17 00:00:00        3.21                 15
-## # ℹ 145 more rows
+## # ℹ 253 more rows
 ## # ℹ 7 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, plastic_bags &lt;dbl&gt;, wrappers &lt;dbl&gt;,
 ## #   homes_powered &lt;dbl&gt;, trash_wheel &lt;chr&gt;</code></pre>
@@ -443,7 +443,7 @@ gwyn.trashwheel_df</code></pre>
   bind_rows(mr.trashwheel_df,prof.trashwheel_df, gwyn.trashwheel_df)
 
 trashwheel_df</code></pre>
-<pre><code>## # A tibble: 845 × 15
+<pre><code>## # A tibble: 1,032 × 15
 ##    dumpster month  year date                weight_tons volume_cubic_yards
 ##       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
 ##  1        1 May    2014 2014-05-16 00:00:00        4.31                 18
@@ -456,14 +456,14 @@ trashwheel_df</code></pre>
 ##  8        8 May    2014 2014-05-28 00:00:00        3.7                  16
 ##  9        9 June   2014 2014-06-05 00:00:00        2.52                 14
 ## 10       10 June   2014 2014-06-11 00:00:00        3.76                 18
-## # ℹ 835 more rows
+## # ℹ 1,022 more rows
 ## # ℹ 9 more variables: plastic_bottles &lt;dbl&gt;, polystyrene &lt;dbl&gt;,
 ## #   cigarette_butts &lt;dbl&gt;, glass_bottles &lt;dbl&gt;, plastic_bags &lt;dbl&gt;,
 ## #   wrappers &lt;dbl&gt;, sports_balls &lt;int&gt;, homes_powered &lt;dbl&gt;, trash_wheel &lt;chr&gt;</code></pre>
-<p>The trash wheel in these 3 locations collected on average 2296
+<p>The trash wheel in these 3 locations collected on average 2201
 plastic bottles per dumpster. The trash wheel data were collected
-between 2014, 2023. Professor Trash Wheel collected a total weight of
-216.26 tons of trash. The total number of cigarette butts that was
+between 2014, 2024. Professor Trash Wheel collected a total weight of
+246.74 tons of trash. The total number of cigarette butts that was
 collected by Gwynda in June of 2022 was 1.812^{4}.</p>
 </div>
 <div id="problem-3" class="section level2">
@@ -498,7 +498,7 @@ achieve this data wrangling.</li>
   read_csv(&quot;data/bakers.csv&quot;) |&gt;
   janitor::clean_names() |&gt;
   separate(baker_name, into = c(&quot;baker&quot;, &quot;last_name&quot;), sep = &quot; &quot;) |&gt;
-  select(-last_name)</code></pre>
+  select(-c(last_name,series))</code></pre>
 <pre><code>## Rows: 120 Columns: 5
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -508,19 +508,19 @@ achieve this data wrangling.</li>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>bakers_df</code></pre>
-<pre><code>## # A tibble: 120 × 5
-##    baker     series baker_age baker_occupation             hometown             
-##    &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;                
-##  1 Ali            4        25 Charity worker               Saltley, Birmingham  
-##  2 Alice         10        28 Geography teacher            Essex                
-##  3 Alvin          6        37 Nurse                        Bracknell, Berkshire 
-##  4 Amelia        10        24 Fashion designer             Halifax              
-##  5 Andrew         7        25 Aerospace engineer           Derby / Holywood, Co…
-##  6 Annetha        1        30 Midwife                      Essex                
-##  7 Antony         9        30 Banker                       London               
-##  8 Beca           4        31 Military Wives&#39; Choir Singer Aldershot, Hampshire 
-##  9 Ben            2        31 Graphic Designer             Northampton          
-## 10 Benjamina      7        23 Teaching assistant           South London         
+<pre><code>## # A tibble: 120 × 4
+##    baker     baker_age baker_occupation             hometown                    
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;                       
+##  1 Ali              25 Charity worker               Saltley, Birmingham         
+##  2 Alice            28 Geography teacher            Essex                       
+##  3 Alvin            37 Nurse                        Bracknell, Berkshire        
+##  4 Amelia           24 Fashion designer             Halifax                     
+##  5 Andrew           25 Aerospace engineer           Derby / Holywood, County Do…
+##  6 Annetha          30 Midwife                      Essex                       
+##  7 Antony           30 Banker                       London                      
+##  8 Beca             31 Military Wives&#39; Choir Singer Aldershot, Hampshire        
+##  9 Ben              31 Graphic Designer             Northampton                 
+## 10 Benjamina        23 Teaching assistant           South London                
 ## # ℹ 110 more rows</code></pre>
 <pre class="r"><code>bakes_df = 
   read_csv(&quot;data/bakes.csv&quot;, na = &quot;N/A&quot;) |&gt;
@@ -552,7 +552,7 @@ achieve this data wrangling.</li>
 <pre class="r"><code>results_df = 
   read_csv(&quot;data/results.csv&quot;, skip = 2, na = &quot;NA&quot;) |&gt;
   janitor::clean_names() |&gt;
-  select(c(baker, technical, result, episode))</code></pre>
+  select(c(baker, technical, result, episode, series))</code></pre>
 <pre><code>## Rows: 1136 Columns: 5
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -562,19 +562,19 @@ achieve this data wrangling.</li>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>results_df</code></pre>
-<pre><code>## # A tibble: 1,136 × 4
-##    baker     technical result episode
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
-##  1 Annetha           2 IN           1
-##  2 David             3 IN           1
-##  3 Edd               1 IN           1
-##  4 Jasminder        NA IN           1
-##  5 Jonathan          9 IN           1
-##  6 Louise           NA IN           1
-##  7 Miranda           8 IN           1
-##  8 Ruth             NA IN           1
-##  9 Lea              10 OUT          1
-## 10 Mark             NA OUT          1
+<pre><code>## # A tibble: 1,136 × 5
+##    baker     technical result episode series
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Annetha           2 IN           1      1
+##  2 David             3 IN           1      1
+##  3 Edd               1 IN           1      1
+##  4 Jasminder        NA IN           1      1
+##  5 Jonathan          9 IN           1      1
+##  6 Louise           NA IN           1      1
+##  7 Miranda           8 IN           1      1
+##  8 Ruth             NA IN           1      1
+##  9 Lea              10 OUT          1      1
+## 10 Mark             NA OUT          1      1
 ## # ℹ 1,126 more rows</code></pre>
 <pre class="r"><code>gbb_df = 
   left_join(bakes_df, bakers_df, by = &quot;baker&quot;) |&gt;
@@ -601,10 +601,10 @@ achieve this data wrangling.</li>
 ##  4      1       4 Annetha Light Jamaica… Red, White …        30 Midwife         
 ##  5      1       5 Annetha Light Jamaica… Red, White …        30 Midwife         
 ##  6      1       6 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  7      1       1 David   Chocolate Ora… Black Fores…        31 Entrepreneur    
-##  8      1       2 David   Chocolate Ora… Black Fores…        31 Entrepreneur    
-##  9      1       3 David   Chocolate Ora… Black Fores…        31 Entrepreneur    
-## 10      1       4 David   Chocolate Ora… Black Fores…        31 Entrepreneur    
+##  7      1       1 David   Chocolate Ora… Black Fores…        36 International h…
+##  8      1       2 David   Chocolate Ora… Black Fores…        36 International h…
+##  9      1       3 David   Chocolate Ora… Black Fores…        36 International h…
+## 10      1       4 David   Chocolate Ora… Black Fores…        36 International h…
 ## # ℹ 8,996 more rows
 ## # ℹ 3 more variables: hometown &lt;chr&gt;, technical &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
 <pre class="r"><code>anti_join(bakes_df, bakers_df, by = &quot;baker&quot;)</code></pre>
@@ -632,40 +632,46 @@ achieve this data wrangling.</li>
 ## 7 &quot;\&quot;Jo\&quot;&quot; Raspberry &amp; Strawberry Mousse Cake                       Pain Aux Ra…
 ## 8 &quot;\&quot;Jo\&quot;&quot; Raspberry and Blueberry Mille Feuille                    Mini Victor…</code></pre>
 <pre class="r"><code>anti_join(results_df, bakers_df, by = &quot;baker&quot;)</code></pre>
-<pre><code>## # A tibble: 8 × 4
-##   baker  technical result     episode
-##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
-## 1 Joanne        11 IN               1
-## 2 Joanne        10 IN               2
-## 3 Joanne         1 IN               3
-## 4 Joanne         8 IN               4
-## 5 Joanne         6 IN               5
-## 6 Joanne         1 STAR BAKER       6
-## 7 Joanne         3 IN               7
-## 8 Joanne         1 WINNER           8</code></pre>
+<pre><code>## # A tibble: 8 × 5
+##   baker  technical result     episode series
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Joanne        11 IN               1      2
+## 2 Joanne        10 IN               2      2
+## 3 Joanne         1 IN               3      2
+## 4 Joanne         8 IN               4      2
+## 5 Joanne         6 IN               5      2
+## 6 Joanne         1 STAR BAKER       6      2
+## 7 Joanne         3 IN               7      2
+## 8 Joanne         1 WINNER           8      2</code></pre>
 <p>Creating a table showing the winner of each episode in Season 5
 through 10</p>
-<pre class="r"><code>gbb_tbl =
-  gbb_df |&gt;
+<pre class="r"><code>results_df |&gt;
   select(baker, series, episode, technical, result) |&gt;
-  filter(technical == 1, series == 5:10) |&gt;
-  arrange(series, episode)
-
-gt(gbb_tbl)</code></pre>
-<div id="dmntdzqics" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dmntdzqics table {
+  filter(technical == 1, series == c(5:10)) |&gt;
+  arrange(series, episode) |&gt;
+  gt() |&gt;
+  tab_header(
+    title = &quot;Great British Bakeoff Episode Winners&quot;,
+    subtitle = &quot;Episode Winners from Season 5 through 10&quot;
+  )</code></pre>
+<pre><code>## Warning: There was 1 warning in `filter()`.
+## ℹ In argument: `series == c(5:10)`.
+## Caused by warning in `series == c(5:10)`:
+## ! longer object length is not a multiple of shorter object length</code></pre>
+<div id="tjcmhytrmn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tjcmhytrmn table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#dmntdzqics thead, #dmntdzqics tbody, #dmntdzqics tfoot, #dmntdzqics tr, #dmntdzqics td, #dmntdzqics th {
+#tjcmhytrmn thead, #tjcmhytrmn tbody, #tjcmhytrmn tfoot, #tjcmhytrmn tr, #tjcmhytrmn td, #tjcmhytrmn th {
 border-style: none;
 }
-#dmntdzqics p {
+#tjcmhytrmn p {
 margin: 0;
 padding: 0;
 }
-#dmntdzqics .gt_table {
+#tjcmhytrmn .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -690,11 +696,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#dmntdzqics .gt_caption {
+#tjcmhytrmn .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#dmntdzqics .gt_title {
+#tjcmhytrmn .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -705,7 +711,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#dmntdzqics .gt_subtitle {
+#tjcmhytrmn .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -716,7 +722,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#dmntdzqics .gt_heading {
+#tjcmhytrmn .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -727,12 +733,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#dmntdzqics .gt_bottom_border {
+#tjcmhytrmn .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#dmntdzqics .gt_col_headings {
+#tjcmhytrmn .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -746,7 +752,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#dmntdzqics .gt_col_heading {
+#tjcmhytrmn .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -765,7 +771,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#dmntdzqics .gt_column_spanner_outer {
+#tjcmhytrmn .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -776,13 +782,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#dmntdzqics .gt_column_spanner_outer:first-child {
+#tjcmhytrmn .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#dmntdzqics .gt_column_spanner_outer:last-child {
+#tjcmhytrmn .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#dmntdzqics .gt_column_spanner {
+#tjcmhytrmn .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -793,10 +799,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#dmntdzqics .gt_spanner_row {
+#tjcmhytrmn .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#dmntdzqics .gt_group_heading {
+#tjcmhytrmn .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -821,7 +827,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#dmntdzqics .gt_empty_group_heading {
+#tjcmhytrmn .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -835,13 +841,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#dmntdzqics .gt_from_md > :first-child {
+#tjcmhytrmn .gt_from_md > :first-child {
 margin-top: 0;
 }
-#dmntdzqics .gt_from_md > :last-child {
+#tjcmhytrmn .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#dmntdzqics .gt_row {
+#tjcmhytrmn .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -859,7 +865,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#dmntdzqics .gt_stub {
+#tjcmhytrmn .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -871,7 +877,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#dmntdzqics .gt_stub_row_group {
+#tjcmhytrmn .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -884,13 +890,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#dmntdzqics .gt_row_group_first td {
+#tjcmhytrmn .gt_row_group_first td {
 border-top-width: 2px;
 }
-#dmntdzqics .gt_row_group_first th {
+#tjcmhytrmn .gt_row_group_first th {
 border-top-width: 2px;
 }
-#dmntdzqics .gt_summary_row {
+#tjcmhytrmn .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -899,14 +905,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#dmntdzqics .gt_first_summary_row {
+#tjcmhytrmn .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#dmntdzqics .gt_first_summary_row.thick {
+#tjcmhytrmn .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#dmntdzqics .gt_last_summary_row {
+#tjcmhytrmn .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -915,7 +921,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#dmntdzqics .gt_grand_summary_row {
+#tjcmhytrmn .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -924,7 +930,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#dmntdzqics .gt_first_grand_summary_row {
+#tjcmhytrmn .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -933,7 +939,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#dmntdzqics .gt_last_grand_summary_row_top {
+#tjcmhytrmn .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -942,10 +948,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#dmntdzqics .gt_striped {
+#tjcmhytrmn .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#dmntdzqics .gt_table_body {
+#tjcmhytrmn .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -953,7 +959,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#dmntdzqics .gt_footnotes {
+#tjcmhytrmn .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -966,7 +972,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#dmntdzqics .gt_footnote {
+#tjcmhytrmn .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -974,7 +980,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#dmntdzqics .gt_sourcenotes {
+#tjcmhytrmn .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -987,69 +993,75 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#dmntdzqics .gt_sourcenote {
+#tjcmhytrmn .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#dmntdzqics .gt_left {
+#tjcmhytrmn .gt_left {
 text-align: left;
 }
-#dmntdzqics .gt_center {
+#tjcmhytrmn .gt_center {
 text-align: center;
 }
-#dmntdzqics .gt_right {
+#tjcmhytrmn .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#dmntdzqics .gt_font_normal {
+#tjcmhytrmn .gt_font_normal {
 font-weight: normal;
 }
-#dmntdzqics .gt_font_bold {
+#tjcmhytrmn .gt_font_bold {
 font-weight: bold;
 }
-#dmntdzqics .gt_font_italic {
+#tjcmhytrmn .gt_font_italic {
 font-style: italic;
 }
-#dmntdzqics .gt_super {
+#tjcmhytrmn .gt_super {
 font-size: 65%;
 }
-#dmntdzqics .gt_footnote_marks {
+#tjcmhytrmn .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#dmntdzqics .gt_asterisk {
+#tjcmhytrmn .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#dmntdzqics .gt_indent_1 {
+#tjcmhytrmn .gt_indent_1 {
 text-indent: 5px;
 }
-#dmntdzqics .gt_indent_2 {
+#tjcmhytrmn .gt_indent_2 {
 text-indent: 10px;
 }
-#dmntdzqics .gt_indent_3 {
+#tjcmhytrmn .gt_indent_3 {
 text-indent: 15px;
 }
-#dmntdzqics .gt_indent_4 {
+#tjcmhytrmn .gt_indent_4 {
 text-indent: 20px;
 }
-#dmntdzqics .gt_indent_5 {
+#tjcmhytrmn .gt_indent_5 {
 text-indent: 25px;
 }
-#dmntdzqics .katex-display {
+#tjcmhytrmn .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#dmntdzqics div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tjcmhytrmn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
+    <tr class="gt_heading">
+      <td colspan="5" class="gt_heading gt_title gt_font_normal" style>Great British Bakeoff Episode Winners</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Episode Winners from Season 5 through 10</td>
+    </tr>
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="baker">baker</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="series">series</th>
@@ -1059,516 +1071,46 @@ height: 0px !important;
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Martha</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">5</td>
 <td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
-<td headers="series" class="gt_row gt_right">5</td>
+    <tr><td headers="baker" class="gt_row gt_left">Ugnė</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="technical" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ian</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="technical" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Candice</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">8</td>
+<td headers="technical" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
+<td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">7</td>
 <td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Luis</td>
-<td headers="series" class="gt_row gt_right">5</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Dorret</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Dorret</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Paul</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">4</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Paul</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">4</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Mat</td>
-<td headers="series" class="gt_row gt_right">6</td>
+    <tr><td headers="baker" class="gt_row gt_left">Briony</td>
+<td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">6</td>
 <td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Mat</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">WINNER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">WINNER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
-<td headers="series" class="gt_row gt_right">6</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">WINNER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Val</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Val</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Andrew</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Andrew</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">2</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">4</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">4</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">4</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Tom</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Tom</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
+    <tr><td headers="baker" class="gt_row gt_left">Briony</td>
+<td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">8</td>
 <td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
+    <tr><td headers="baker" class="gt_row gt_left">Kim-Joy</td>
+<td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">10</td>
 <td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">James</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
-<td headers="series" class="gt_row gt_right">8</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
-<td headers="series" class="gt_row gt_right">9</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">David</td>
-<td headers="series" class="gt_row gt_right">10</td>
-<td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">David</td>
-<td headers="series" class="gt_row gt_right">10</td>
-<td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">WINNER</td></tr>
   </tbody>
   
   

@@ -23,7 +23,7 @@ Load Trash Wheel Data from excel and combine Mr. Trash Wheel, Professor Trash Wh
 
 ```{r}
 mr.trashwheel_df = 
-  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N586", na = "") |>
+  read_excel("data/202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N653", na = "") |>
   janitor::clean_names() |>
   mutate(sports_balls = round(sports_balls)) |>
   mutate(sports_balls = as.integer(sports_balls)) |>
@@ -33,14 +33,14 @@ mr.trashwheel_df =
 mr.trashwheel_df
 
 prof.trashwheel_df =  
-  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M108", na = "") |>
+  read_excel("data/202409 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M120", na = "") |>
   janitor::clean_names() |>
   mutate(trash_wheel = "prof") 
 
 prof.trashwheel_df
 
 gwyn.trashwheel_df = 
-  read_excel("data/202309 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", range = "A2:L157", na = "") |>
+  read_excel("data/202409 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", range = "A2:L265", na = "") |>
   janitor::clean_names() |>
   mutate(trash_wheel = "gwyn") 
 
@@ -109,7 +109,7 @@ Creating a table showing the winner of each episode in Season 5 through 10
 ```{r}
 results_df |>
   select(baker, series, episode, technical, result) |>
-  filter(technical == 1, series == 5:10 |>
+  filter(technical == 1, series == c(5:10)) |>
   arrange(series, episode) |>
   gt() |>
   tab_header(
