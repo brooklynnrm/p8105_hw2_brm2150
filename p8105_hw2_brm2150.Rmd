@@ -64,38 +64,37 @@ Importing and wrangling the data sets from the Great British Bakeoff show. To cr
 2.  `clean_names` to transform all of the variable names to snake case.
 3.  In `bakers_df` the `baker_name` variable needed to have the last name removed so it could be used to join with the , so I used `separate` and `select` to remove the last name.
 4.  I selected only the unique columns in `bakes_df` and `results_df` so that it didn't cause issues when joining the data sets together.
-5.  I then created a new data frame `gbb_df` that joined together the 3 data sets using the `left_join` function.
+5.  I then created a new data frame `gbb_df` that joined together the 3 data sets using the `full_join` function.I also made sure to join by `baker`, `series` and `episode` to make sure the data was aligned and no duplicates were made.
 6.  I also found that a few data was missing from the final data frame because it had missing values for all of the variables. This was checked using the `anti-join` function.
 7.  I used `tidyverse` and the `pipe` function to achieve this data wrangling.
+
+
+It seems that "Jo" is being left out and is maybe named "Joanne" in other tables. I am choosing to not include them in the final table because it is unclear if they are the same person or not. 
 
 ```{r}
 bakers_df =
   read_csv("data/bakers.csv") |>
   janitor::clean_names() |>
-  separate(baker_name, into = c("baker", "last_name"), sep = " ") |>
-  select(-c(last_name,series))
+  separate(baker_name, into = c("baker", "last_name"), sep = " ")
 
 bakers_df
 
 bakes_df = 
   read_csv("data/bakes.csv", na = "N/A") |>
-  janitor::clean_names() |>
-  select(c(baker, signature_bake, show_stopper))
+  janitor::clean_names()
 
 bakes_df
 
 results_df = 
   read_csv("data/results.csv", skip = 2, na = "NA") |>
-  janitor::clean_names() |>
-  select(c(baker, technical, result, episode, series))
+  janitor::clean_names()
 
 results_df
 
 gbb_df = 
-  left_join(bakes_df, bakers_df, by = "baker") |>
-  left_join(results_df, by = "baker") |>
-  relocate(series, episode, baker) |>
-  arrange(series)
+  results_df |>
+  full_join(bakes_df, by = c("baker", "series","episode")) |>
+  full_join(bakers_df, by = c("baker", "series")) 
 
 gbb_df
 
@@ -107,9 +106,9 @@ anti_join(results_df, bakers_df, by = "baker")
 Creating a table showing the winner of each episode in Season 5 through 10
 
 ```{r}
-results_df |>
-  select(baker, series, episode, technical, result) |>
-  filter(technical == 1, series == c(5:10)) |>
+gbb_df |>
+  filter(technical == 1, series >= 5) |>
+  select(c(baker, series, episode, result)) |>
   arrange(series, episode) |>
   gt() |>
   tab_header(
