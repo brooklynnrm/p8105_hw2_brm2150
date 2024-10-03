@@ -487,18 +487,23 @@ the last name.</li>
 <code>results_df</code> so that it didn’t cause issues when joining the
 data sets together.</li>
 <li>I then created a new data frame <code>gbb_df</code> that joined
-together the 3 data sets using the <code>left_join</code> function.</li>
+together the 3 data sets using the <code>full_join</code> function.I
+also made sure to join by <code>baker</code>, <code>series</code> and
+<code>episode</code> to make sure the data was aligned and no duplicates
+were made.</li>
 <li>I also found that a few data was missing from the final data frame
 because it had missing values for all of the variables. This was checked
 using the <code>anti-join</code> function.</li>
 <li>I used <code>tidyverse</code> and the <code>pipe</code> function to
 achieve this data wrangling.</li>
 </ol>
+<p>It seems that “Jo” is being left out and is maybe named “Joanne” in
+other tables. I am choosing to not include them in the final table
+because it is unclear if they are the same person or not.</p>
 <pre class="r"><code>bakers_df =
   read_csv(&quot;data/bakers.csv&quot;) |&gt;
   janitor::clean_names() |&gt;
-  separate(baker_name, into = c(&quot;baker&quot;, &quot;last_name&quot;), sep = &quot; &quot;) |&gt;
-  select(-c(last_name,series))</code></pre>
+  separate(baker_name, into = c(&quot;baker&quot;, &quot;last_name&quot;), sep = &quot; &quot;)</code></pre>
 <pre><code>## Rows: 120 Columns: 5
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -508,24 +513,23 @@ achieve this data wrangling.</li>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>bakers_df</code></pre>
-<pre><code>## # A tibble: 120 × 4
-##    baker     baker_age baker_occupation             hometown                    
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;                       
-##  1 Ali              25 Charity worker               Saltley, Birmingham         
-##  2 Alice            28 Geography teacher            Essex                       
-##  3 Alvin            37 Nurse                        Bracknell, Berkshire        
-##  4 Amelia           24 Fashion designer             Halifax                     
-##  5 Andrew           25 Aerospace engineer           Derby / Holywood, County Do…
-##  6 Annetha          30 Midwife                      Essex                       
-##  7 Antony           30 Banker                       London                      
-##  8 Beca             31 Military Wives&#39; Choir Singer Aldershot, Hampshire        
-##  9 Ben              31 Graphic Designer             Northampton                 
-## 10 Benjamina        23 Teaching assistant           South London                
+<pre><code>## # A tibble: 120 × 6
+##    baker     last_name   series baker_age baker_occupation             hometown 
+##    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;    
+##  1 Ali       Imdad            4        25 Charity worker               Saltley,…
+##  2 Alice     Fevronia        10        28 Geography teacher            Essex    
+##  3 Alvin     Magallanes       6        37 Nurse                        Bracknel…
+##  4 Amelia    LeBruin         10        24 Fashion designer             Halifax  
+##  5 Andrew    Smyth            7        25 Aerospace engineer           Derby / …
+##  6 Annetha   Mills            1        30 Midwife                      Essex    
+##  7 Antony    Amourdoux        9        30 Banker                       London   
+##  8 Beca      Lyne-Pirkis      4        31 Military Wives&#39; Choir Singer Aldersho…
+##  9 Ben       Frazer           2        31 Graphic Designer             Northamp…
+## 10 Benjamina Ebuehi           7        23 Teaching assistant           South Lo…
 ## # ℹ 110 more rows</code></pre>
 <pre class="r"><code>bakes_df = 
   read_csv(&quot;data/bakes.csv&quot;, na = &quot;N/A&quot;) |&gt;
-  janitor::clean_names() |&gt;
-  select(c(baker, signature_bake, show_stopper))</code></pre>
+  janitor::clean_names()</code></pre>
 <pre><code>## Rows: 548 Columns: 5
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -535,24 +539,23 @@ achieve this data wrangling.</li>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>bakes_df</code></pre>
-<pre><code>## # A tibble: 548 × 3
-##    baker     signature_bake                                         show_stopper
-##    &lt;chr&gt;     &lt;chr&gt;                                                  &lt;chr&gt;       
-##  1 Annetha   &quot;Light Jamaican Black Cakewith Strawberries and Cream&quot; Red, White …
-##  2 David     &quot;Chocolate Orange Cake&quot;                                Black Fores…
-##  3 Edd       &quot;Caramel Cinnamon and Banana Cake&quot;                     &lt;NA&gt;        
-##  4 Jasminder &quot;Fresh Mango and Passion Fruit Hummingbird Cake&quot;       &lt;NA&gt;        
-##  5 Jonathan  &quot;Carrot Cake with Lime and Cream Cheese Icing&quot;         Three Tiere…
-##  6 Lea       &quot;Cranberry and Pistachio Cakewith Orange Flower Water… Raspberries…
-##  7 Louise    &quot;Carrot and Orange Cake&quot;                               Never Fail …
-##  8 Mark      &quot;Sticky Marmalade Tea Loaf&quot;                            Heart-shape…
-##  9 Miranda   &quot;Triple Layered Brownie Meringue Cake\nwith Raspberry… Three Tiere…
-## 10 Ruth      &quot;Three Tiered Lemon Drizzle Cakewith Fresh Cream and … Classic Cho…
+<pre><code>## # A tibble: 548 × 5
+##    series episode baker     signature_bake                          show_stopper
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;                                   &lt;chr&gt;       
+##  1      1       1 Annetha   &quot;Light Jamaican Black Cakewith Strawbe… Red, White …
+##  2      1       1 David     &quot;Chocolate Orange Cake&quot;                 Black Fores…
+##  3      1       1 Edd       &quot;Caramel Cinnamon and Banana Cake&quot;      &lt;NA&gt;        
+##  4      1       1 Jasminder &quot;Fresh Mango and Passion Fruit Humming… &lt;NA&gt;        
+##  5      1       1 Jonathan  &quot;Carrot Cake with Lime and Cream Chees… Three Tiere…
+##  6      1       1 Lea       &quot;Cranberry and Pistachio Cakewith Oran… Raspberries…
+##  7      1       1 Louise    &quot;Carrot and Orange Cake&quot;                Never Fail …
+##  8      1       1 Mark      &quot;Sticky Marmalade Tea Loaf&quot;             Heart-shape…
+##  9      1       1 Miranda   &quot;Triple Layered Brownie Meringue Cake\… Three Tiere…
+## 10      1       1 Ruth      &quot;Three Tiered Lemon Drizzle Cakewith F… Classic Cho…
 ## # ℹ 538 more rows</code></pre>
 <pre class="r"><code>results_df = 
   read_csv(&quot;data/results.csv&quot;, skip = 2, na = &quot;NA&quot;) |&gt;
-  janitor::clean_names() |&gt;
-  select(c(baker, technical, result, episode, series))</code></pre>
+  janitor::clean_names()</code></pre>
 <pre><code>## Rows: 1136 Columns: 5
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -563,115 +566,101 @@ achieve this data wrangling.</li>
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>results_df</code></pre>
 <pre><code>## # A tibble: 1,136 × 5
-##    baker     technical result episode series
-##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Annetha           2 IN           1      1
-##  2 David             3 IN           1      1
-##  3 Edd               1 IN           1      1
-##  4 Jasminder        NA IN           1      1
-##  5 Jonathan          9 IN           1      1
-##  6 Louise           NA IN           1      1
-##  7 Miranda           8 IN           1      1
-##  8 Ruth             NA IN           1      1
-##  9 Lea              10 OUT          1      1
-## 10 Mark             NA OUT          1      1
+##    series episode baker     technical result
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; 
+##  1      1       1 Annetha           2 IN    
+##  2      1       1 David             3 IN    
+##  3      1       1 Edd               1 IN    
+##  4      1       1 Jasminder        NA IN    
+##  5      1       1 Jonathan          9 IN    
+##  6      1       1 Louise           NA IN    
+##  7      1       1 Miranda           8 IN    
+##  8      1       1 Ruth             NA IN    
+##  9      1       1 Lea              10 OUT   
+## 10      1       1 Mark             NA OUT   
 ## # ℹ 1,126 more rows</code></pre>
 <pre class="r"><code>gbb_df = 
-  left_join(bakes_df, bakers_df, by = &quot;baker&quot;) |&gt;
-  left_join(results_df, by = &quot;baker&quot;) |&gt;
-  relocate(series, episode, baker) |&gt;
-  arrange(series)</code></pre>
-<pre><code>## Warning in left_join(bakes_df, bakers_df, by = &quot;baker&quot;): Detected an unexpected many-to-many relationship between `x` and `y`.
-## ℹ Row 2 of `x` matches multiple rows in `y`.
-## ℹ Row 6 of `y` matches multiple rows in `x`.
-## ℹ If a many-to-many relationship is expected, set `relationship =
-##   &quot;many-to-many&quot;` to silence this warning.</code></pre>
-<pre><code>## Warning in left_join(left_join(bakes_df, bakers_df, by = &quot;baker&quot;), results_df, : Detected an unexpected many-to-many relationship between `x` and `y`.
-## ℹ Row 1 of `x` matches multiple rows in `y`.
-## ℹ Row 2 of `y` matches multiple rows in `x`.
-## ℹ If a many-to-many relationship is expected, set `relationship =
-##   &quot;many-to-many&quot;` to silence this warning.</code></pre>
-<pre class="r"><code>gbb_df</code></pre>
-<pre><code>## # A tibble: 9,006 × 10
-##    series episode baker   signature_bake show_stopper baker_age baker_occupation
-##     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;           
-##  1      1       1 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  2      1       2 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  3      1       3 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  4      1       4 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  5      1       5 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  6      1       6 Annetha Light Jamaica… Red, White …        30 Midwife         
-##  7      1       1 David   Chocolate Ora… Black Fores…        36 International h…
-##  8      1       2 David   Chocolate Ora… Black Fores…        36 International h…
-##  9      1       3 David   Chocolate Ora… Black Fores…        36 International h…
-## 10      1       4 David   Chocolate Ora… Black Fores…        36 International h…
-## # ℹ 8,996 more rows
-## # ℹ 3 more variables: hometown &lt;chr&gt;, technical &lt;dbl&gt;, result &lt;chr&gt;</code></pre>
+  results_df |&gt;
+  full_join(bakes_df, by = c(&quot;baker&quot;, &quot;series&quot;,&quot;episode&quot;)) |&gt;
+  full_join(bakers_df, by = c(&quot;baker&quot;, &quot;series&quot;)) 
+
+gbb_df</code></pre>
+<pre><code>## # A tibble: 1,145 × 11
+##    series episode baker   technical result signature_bake show_stopper last_name
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;    
+##  1      1       1 Annetha         2 IN     &quot;Light Jamaic… Red, White … Mills    
+##  2      1       1 David           3 IN     &quot;Chocolate Or… Black Fores… Chambers 
+##  3      1       1 Edd             1 IN     &quot;Caramel Cinn… &lt;NA&gt;         Kimber   
+##  4      1       1 Jasmin…        NA IN     &quot;Fresh Mango … &lt;NA&gt;         Randhawa 
+##  5      1       1 Jonath…         9 IN     &quot;Carrot Cake … Three Tiere… Shepherd 
+##  6      1       1 Louise         NA IN     &quot;Carrot and O… Never Fail … Brimelow 
+##  7      1       1 Miranda         8 IN     &quot;Triple Layer… Three Tiere… Browne   
+##  8      1       1 Ruth           NA IN     &quot;Three Tiered… Classic Cho… Clemens  
+##  9      1       1 Lea            10 OUT    &quot;Cranberry an… Raspberries… Harris   
+## 10      1       1 Mark           NA OUT    &quot;Sticky Marma… Heart-shape… Whithers 
+## # ℹ 1,135 more rows
+## # ℹ 3 more variables: baker_age &lt;dbl&gt;, baker_occupation &lt;chr&gt;, hometown &lt;chr&gt;</code></pre>
 <pre class="r"><code>anti_join(bakes_df, bakers_df, by = &quot;baker&quot;)</code></pre>
-<pre><code>## # A tibble: 8 × 3
-##   baker    signature_bake                                           show_stopper
-##   &lt;chr&gt;    &lt;chr&gt;                                                    &lt;chr&gt;       
-## 1 &quot;\&quot;Jo\&quot;&quot; Chocolate Orange CupcakesOrange and Cardamom Cupcakes    Chocolate a…
-## 2 &quot;\&quot;Jo\&quot;&quot; Caramelised Onion, Gruyere and Thyme Quiche              Raspberry a…
-## 3 &quot;\&quot;Jo\&quot;&quot; Stromboli flavored with Mozzarella, Ham, and Picante Pe… Unknown     
-## 4 &quot;\&quot;Jo\&quot;&quot; Lavender Biscuits                                        Blueberry M…
-## 5 &quot;\&quot;Jo\&quot;&quot; Salmon and Asparagus Pie                                 Apple and R…
-## 6 &quot;\&quot;Jo\&quot;&quot; Rum and Raisin Baked Cheesecake                          Limoncello …
-## 7 &quot;\&quot;Jo\&quot;&quot; Raspberry &amp; Strawberry Mousse Cake                       Pain Aux Ra…
-## 8 &quot;\&quot;Jo\&quot;&quot; Raspberry and Blueberry Mille Feuille                    Mini Victor…</code></pre>
+<pre><code>## # A tibble: 8 × 5
+##   series episode baker    signature_bake                            show_stopper
+##    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                                     &lt;chr&gt;       
+## 1      2       1 &quot;\&quot;Jo\&quot;&quot; Chocolate Orange CupcakesOrange and Card… Chocolate a…
+## 2      2       2 &quot;\&quot;Jo\&quot;&quot; Caramelised Onion, Gruyere and Thyme Qui… Raspberry a…
+## 3      2       3 &quot;\&quot;Jo\&quot;&quot; Stromboli flavored with Mozzarella, Ham,… Unknown     
+## 4      2       4 &quot;\&quot;Jo\&quot;&quot; Lavender Biscuits                         Blueberry M…
+## 5      2       5 &quot;\&quot;Jo\&quot;&quot; Salmon and Asparagus Pie                  Apple and R…
+## 6      2       6 &quot;\&quot;Jo\&quot;&quot; Rum and Raisin Baked Cheesecake           Limoncello …
+## 7      2       7 &quot;\&quot;Jo\&quot;&quot; Raspberry &amp; Strawberry Mousse Cake        Pain Aux Ra…
+## 8      2       8 &quot;\&quot;Jo\&quot;&quot; Raspberry and Blueberry Mille Feuille     Mini Victor…</code></pre>
 <pre class="r"><code>anti_join(bakes_df, results_df, by = &quot;baker&quot;)</code></pre>
-<pre><code>## # A tibble: 8 × 3
-##   baker    signature_bake                                           show_stopper
-##   &lt;chr&gt;    &lt;chr&gt;                                                    &lt;chr&gt;       
-## 1 &quot;\&quot;Jo\&quot;&quot; Chocolate Orange CupcakesOrange and Cardamom Cupcakes    Chocolate a…
-## 2 &quot;\&quot;Jo\&quot;&quot; Caramelised Onion, Gruyere and Thyme Quiche              Raspberry a…
-## 3 &quot;\&quot;Jo\&quot;&quot; Stromboli flavored with Mozzarella, Ham, and Picante Pe… Unknown     
-## 4 &quot;\&quot;Jo\&quot;&quot; Lavender Biscuits                                        Blueberry M…
-## 5 &quot;\&quot;Jo\&quot;&quot; Salmon and Asparagus Pie                                 Apple and R…
-## 6 &quot;\&quot;Jo\&quot;&quot; Rum and Raisin Baked Cheesecake                          Limoncello …
-## 7 &quot;\&quot;Jo\&quot;&quot; Raspberry &amp; Strawberry Mousse Cake                       Pain Aux Ra…
-## 8 &quot;\&quot;Jo\&quot;&quot; Raspberry and Blueberry Mille Feuille                    Mini Victor…</code></pre>
+<pre><code>## # A tibble: 8 × 5
+##   series episode baker    signature_bake                            show_stopper
+##    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                                     &lt;chr&gt;       
+## 1      2       1 &quot;\&quot;Jo\&quot;&quot; Chocolate Orange CupcakesOrange and Card… Chocolate a…
+## 2      2       2 &quot;\&quot;Jo\&quot;&quot; Caramelised Onion, Gruyere and Thyme Qui… Raspberry a…
+## 3      2       3 &quot;\&quot;Jo\&quot;&quot; Stromboli flavored with Mozzarella, Ham,… Unknown     
+## 4      2       4 &quot;\&quot;Jo\&quot;&quot; Lavender Biscuits                         Blueberry M…
+## 5      2       5 &quot;\&quot;Jo\&quot;&quot; Salmon and Asparagus Pie                  Apple and R…
+## 6      2       6 &quot;\&quot;Jo\&quot;&quot; Rum and Raisin Baked Cheesecake           Limoncello …
+## 7      2       7 &quot;\&quot;Jo\&quot;&quot; Raspberry &amp; Strawberry Mousse Cake        Pain Aux Ra…
+## 8      2       8 &quot;\&quot;Jo\&quot;&quot; Raspberry and Blueberry Mille Feuille     Mini Victor…</code></pre>
 <pre class="r"><code>anti_join(results_df, bakers_df, by = &quot;baker&quot;)</code></pre>
 <pre><code>## # A tibble: 8 × 5
-##   baker  technical result     episode series
-##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Joanne        11 IN               1      2
-## 2 Joanne        10 IN               2      2
-## 3 Joanne         1 IN               3      2
-## 4 Joanne         8 IN               4      2
-## 5 Joanne         6 IN               5      2
-## 6 Joanne         1 STAR BAKER       6      2
-## 7 Joanne         3 IN               7      2
-## 8 Joanne         1 WINNER           8      2</code></pre>
+##   series episode baker  technical result    
+##    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     
+## 1      2       1 Joanne        11 IN        
+## 2      2       2 Joanne        10 IN        
+## 3      2       3 Joanne         1 IN        
+## 4      2       4 Joanne         8 IN        
+## 5      2       5 Joanne         6 IN        
+## 6      2       6 Joanne         1 STAR BAKER
+## 7      2       7 Joanne         3 IN        
+## 8      2       8 Joanne         1 WINNER</code></pre>
 <p>Creating a table showing the winner of each episode in Season 5
 through 10</p>
-<pre class="r"><code>results_df |&gt;
-  select(baker, series, episode, technical, result) |&gt;
-  filter(technical == 1, series == c(5:10)) |&gt;
+<pre class="r"><code>gbb_df |&gt;
+  filter(technical == 1, series &gt;= 5) |&gt;
+  select(c(baker, series, episode, result)) |&gt;
   arrange(series, episode) |&gt;
   gt() |&gt;
   tab_header(
     title = &quot;Great British Bakeoff Episode Winners&quot;,
     subtitle = &quot;Episode Winners from Season 5 through 10&quot;
   )</code></pre>
-<pre><code>## Warning: There was 1 warning in `filter()`.
-## ℹ In argument: `series == c(5:10)`.
-## Caused by warning in `series == c(5:10)`:
-## ! longer object length is not a multiple of shorter object length</code></pre>
-<div id="tjcmhytrmn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tjcmhytrmn table {
+<div id="jlkqgvtowp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jlkqgvtowp table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#tjcmhytrmn thead, #tjcmhytrmn tbody, #tjcmhytrmn tfoot, #tjcmhytrmn tr, #tjcmhytrmn td, #tjcmhytrmn th {
+#jlkqgvtowp thead, #jlkqgvtowp tbody, #jlkqgvtowp tfoot, #jlkqgvtowp tr, #jlkqgvtowp td, #jlkqgvtowp th {
 border-style: none;
 }
-#tjcmhytrmn p {
+#jlkqgvtowp p {
 margin: 0;
 padding: 0;
 }
-#tjcmhytrmn .gt_table {
+#jlkqgvtowp .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -696,11 +685,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_caption {
+#jlkqgvtowp .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#tjcmhytrmn .gt_title {
+#jlkqgvtowp .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -711,7 +700,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#tjcmhytrmn .gt_subtitle {
+#jlkqgvtowp .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -722,7 +711,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#tjcmhytrmn .gt_heading {
+#jlkqgvtowp .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -733,12 +722,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_bottom_border {
+#jlkqgvtowp .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_col_headings {
+#jlkqgvtowp .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -752,7 +741,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_col_heading {
+#jlkqgvtowp .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -771,7 +760,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#tjcmhytrmn .gt_column_spanner_outer {
+#jlkqgvtowp .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -782,13 +771,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#tjcmhytrmn .gt_column_spanner_outer:first-child {
+#jlkqgvtowp .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#tjcmhytrmn .gt_column_spanner_outer:last-child {
+#jlkqgvtowp .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#tjcmhytrmn .gt_column_spanner {
+#jlkqgvtowp .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -799,10 +788,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#tjcmhytrmn .gt_spanner_row {
+#jlkqgvtowp .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#tjcmhytrmn .gt_group_heading {
+#jlkqgvtowp .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -827,7 +816,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#tjcmhytrmn .gt_empty_group_heading {
+#jlkqgvtowp .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -841,13 +830,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#tjcmhytrmn .gt_from_md > :first-child {
+#jlkqgvtowp .gt_from_md > :first-child {
 margin-top: 0;
 }
-#tjcmhytrmn .gt_from_md > :last-child {
+#jlkqgvtowp .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#tjcmhytrmn .gt_row {
+#jlkqgvtowp .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -865,7 +854,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#tjcmhytrmn .gt_stub {
+#jlkqgvtowp .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -877,7 +866,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#tjcmhytrmn .gt_stub_row_group {
+#jlkqgvtowp .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -890,13 +879,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#tjcmhytrmn .gt_row_group_first td {
+#jlkqgvtowp .gt_row_group_first td {
 border-top-width: 2px;
 }
-#tjcmhytrmn .gt_row_group_first th {
+#jlkqgvtowp .gt_row_group_first th {
 border-top-width: 2px;
 }
-#tjcmhytrmn .gt_summary_row {
+#jlkqgvtowp .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -905,14 +894,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#tjcmhytrmn .gt_first_summary_row {
+#jlkqgvtowp .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_first_summary_row.thick {
+#jlkqgvtowp .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#tjcmhytrmn .gt_last_summary_row {
+#jlkqgvtowp .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -921,7 +910,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_grand_summary_row {
+#jlkqgvtowp .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -930,7 +919,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#tjcmhytrmn .gt_first_grand_summary_row {
+#jlkqgvtowp .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -939,7 +928,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_last_grand_summary_row_top {
+#jlkqgvtowp .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -948,10 +937,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_striped {
+#jlkqgvtowp .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#tjcmhytrmn .gt_table_body {
+#jlkqgvtowp .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -959,7 +948,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_footnotes {
+#jlkqgvtowp .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -972,7 +961,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_footnote {
+#jlkqgvtowp .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -980,7 +969,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#tjcmhytrmn .gt_sourcenotes {
+#jlkqgvtowp .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -993,124 +982,323 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#tjcmhytrmn .gt_sourcenote {
+#jlkqgvtowp .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#tjcmhytrmn .gt_left {
+#jlkqgvtowp .gt_left {
 text-align: left;
 }
-#tjcmhytrmn .gt_center {
+#jlkqgvtowp .gt_center {
 text-align: center;
 }
-#tjcmhytrmn .gt_right {
+#jlkqgvtowp .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#tjcmhytrmn .gt_font_normal {
+#jlkqgvtowp .gt_font_normal {
 font-weight: normal;
 }
-#tjcmhytrmn .gt_font_bold {
+#jlkqgvtowp .gt_font_bold {
 font-weight: bold;
 }
-#tjcmhytrmn .gt_font_italic {
+#jlkqgvtowp .gt_font_italic {
 font-style: italic;
 }
-#tjcmhytrmn .gt_super {
+#jlkqgvtowp .gt_super {
 font-size: 65%;
 }
-#tjcmhytrmn .gt_footnote_marks {
+#jlkqgvtowp .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#tjcmhytrmn .gt_asterisk {
+#jlkqgvtowp .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#tjcmhytrmn .gt_indent_1 {
+#jlkqgvtowp .gt_indent_1 {
 text-indent: 5px;
 }
-#tjcmhytrmn .gt_indent_2 {
+#jlkqgvtowp .gt_indent_2 {
 text-indent: 10px;
 }
-#tjcmhytrmn .gt_indent_3 {
+#jlkqgvtowp .gt_indent_3 {
 text-indent: 15px;
 }
-#tjcmhytrmn .gt_indent_4 {
+#jlkqgvtowp .gt_indent_4 {
 text-indent: 20px;
 }
-#tjcmhytrmn .gt_indent_5 {
+#jlkqgvtowp .gt_indent_5 {
 text-indent: 25px;
 }
-#tjcmhytrmn .katex-display {
+#jlkqgvtowp .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#tjcmhytrmn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jlkqgvtowp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
     <tr class="gt_heading">
-      <td colspan="5" class="gt_heading gt_title gt_font_normal" style>Great British Bakeoff Episode Winners</td>
+      <td colspan="4" class="gt_heading gt_title gt_font_normal" style>Great British Bakeoff Episode Winners</td>
     </tr>
     <tr class="gt_heading">
-      <td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Episode Winners from Season 5 through 10</td>
+      <td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Episode Winners from Season 5 through 10</td>
     </tr>
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="baker">baker</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="series">series</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="episode">episode</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="technical">technical</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="result">result</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
+    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">2</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Martha</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Martha</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">5</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">6</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">7</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Chetna</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">8</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Luis</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
+<td headers="series" class="gt_row gt_right">5</td>
+<td headers="episode" class="gt_row gt_right">10</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Ugnė</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="technical" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Dorret</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">2</td>
 <td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Ian</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="technical" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Paul</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">5</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Mat</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">6</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">7</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">8</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Flora</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">OUT</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
+<td headers="series" class="gt_row gt_right">6</td>
+<td headers="episode" class="gt_row gt_right">10</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">2</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Val</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Benjamina</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">5</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Tom</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">6</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Andrew</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">7</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Candice</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Andrew</td>
+<td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">10</td>
+<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">2</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Sophie</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">5</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">6</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Steven</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">7</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">8</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Sophie</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
+<td headers="series" class="gt_row gt_right">8</td>
+<td headers="episode" class="gt_row gt_right">10</td>
+<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Jon</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">2</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Terry</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Dan</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">5</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Briony</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">6</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Rahul</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">7</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Briony</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
+<td headers="series" class="gt_row gt_right">9</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Kim-Joy</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">10</td>
-<td headers="technical" class="gt_row gt_right">1</td>
 <td headers="result" class="gt_row gt_left">Runner-up</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Henry</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">1</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Alice</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">2</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Henry</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">3</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steph</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">4</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Helena</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">5</td>
+<td headers="result" class="gt_row gt_left">OUT</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Alice</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">6</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Rosie</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">7</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">David</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">8</td>
+<td headers="result" class="gt_row gt_left">IN</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Rosie</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">OUT</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">David</td>
+<td headers="series" class="gt_row gt_right">10</td>
+<td headers="episode" class="gt_row gt_right">10</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
   </tbody>
   
   

@@ -2,7 +2,9 @@
 title: "p8105_hw2_brm2150"
 author: "Brooklynn McNeil"
 date: "2024-09-24"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 This is an R markdown document for the homework assignment #2 for the p8105 Data Science 1 Class.
@@ -107,7 +109,7 @@ Creating a table showing the winner of each episode in Season 5 through 10
 
 ```{r}
 gbb_df |>
-  filter(technical == 1, series >= 5) |>
+  filter(result == "STAR BAKER"|result == "WINNER", series >=5) |>
   select(c(baker, series, episode, result)) |>
   arrange(series, episode) |>
   gt() |>
@@ -116,3 +118,4 @@ gbb_df |>
     subtitle = "Episode Winners from Season 5 through 10"
   )
 ```
+In season 5 it looks like there was an upset because Richard won the last 3 episodes before the finale but Nancy took the cake *literally*. Nadiya powered through the last 3 episodes of season 6 to become the winner. Rahul looks like he started strong and then lost some steam, but came back to win the season in the end. Season 10 was probably the most surprising because the winner, David, was never crowned star baker in an episode before the finale. 
