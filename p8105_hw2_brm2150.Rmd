@@ -2,9 +2,7 @@
 title: "p8105_hw2_brm2150"
 author: "Brooklynn McNeil"
 date: "2024-09-24"
-output:
-  pdf_document: default
-  html_document: default
+output: github_document
 ---
 
 This is an R markdown document for the homework assignment #2 for the p8105 Data Science 1 Class.
