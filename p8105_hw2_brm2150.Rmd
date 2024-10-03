@@ -3,8 +3,8 @@ title: "p8105_hw2_brm2150"
 author: "Brooklynn McNeil"
 date: "2024-09-24"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 This is an R markdown document for the homework assignment #2 for the p8105 Data Science 1 Class.
@@ -18,6 +18,35 @@ library(gt)
 ```
 
 ## Problem 1
+
+Read and clean the data; retain line, station, name, station latitude / longitude, routes served, entry, vending, entrance type, and ADA compliance. Convert the entry variable from character (YES vs NO) to a logical variable (the ifelse or case_match function may be useful)
+
+```{r}
+nyc_transit_df = 
+  read_csv("data/NYC_Transit_subway_Entrance_And_Exit_Data.csv", col_types = cols(Route8 = "c", Route9 = "c", Route10 = "c", Route11 = "c")) |>
+  janitor::clean_names() |>
+  select(
+    line, station_name, station_latitude, station_longitude, 
+    starts_with("route"), entry, exit_only, vending, entrance_type, 
+    ada) |> 
+  mutate(entry = ifelse(entry == "YES", TRUE, FALSE)) |>
+  pivot_longer(
+    route1:route11,
+    names_to = "route_num",
+    values_to = "route")
+```
+This code chunk finds the distinct A train stations and then out of those which ones are ADA compliant.
+```{r}
+nyc_transit_df |> 
+  filter(route == "A") |> 
+  select(station_name, line) |> 
+  distinct()
+
+nyc_transit_df |> 
+  filter(route == "A", ada == TRUE) |> 
+  select(station_name, line) |> 
+  distinct()
+```
 
 ## Problem 2
 
