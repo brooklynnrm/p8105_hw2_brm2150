@@ -639,7 +639,7 @@ gbb_df</code></pre>
 <p>Creating a table showing the winner of each episode in Season 5
 through 10</p>
 <pre class="r"><code>gbb_df |&gt;
-  filter(technical == 1, series &gt;= 5) |&gt;
+  filter(result == &quot;STAR BAKER&quot;|result == &quot;WINNER&quot;, series &gt;=5) |&gt;
   select(c(baker, series, episode, result)) |&gt;
   arrange(series, episode) |&gt;
   gt() |&gt;
@@ -647,20 +647,20 @@ through 10</p>
     title = &quot;Great British Bakeoff Episode Winners&quot;,
     subtitle = &quot;Episode Winners from Season 5 through 10&quot;
   )</code></pre>
-<div id="jlkqgvtowp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jlkqgvtowp table {
+<div id="rbwmxzkctk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rbwmxzkctk table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#jlkqgvtowp thead, #jlkqgvtowp tbody, #jlkqgvtowp tfoot, #jlkqgvtowp tr, #jlkqgvtowp td, #jlkqgvtowp th {
+#rbwmxzkctk thead, #rbwmxzkctk tbody, #rbwmxzkctk tfoot, #rbwmxzkctk tr, #rbwmxzkctk td, #rbwmxzkctk th {
 border-style: none;
 }
-#jlkqgvtowp p {
+#rbwmxzkctk p {
 margin: 0;
 padding: 0;
 }
-#jlkqgvtowp .gt_table {
+#rbwmxzkctk .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -685,11 +685,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_caption {
+#rbwmxzkctk .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#jlkqgvtowp .gt_title {
+#rbwmxzkctk .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -700,7 +700,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#jlkqgvtowp .gt_subtitle {
+#rbwmxzkctk .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -711,7 +711,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#jlkqgvtowp .gt_heading {
+#rbwmxzkctk .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -722,12 +722,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_bottom_border {
+#rbwmxzkctk .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_col_headings {
+#rbwmxzkctk .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -741,7 +741,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_col_heading {
+#rbwmxzkctk .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -760,7 +760,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#jlkqgvtowp .gt_column_spanner_outer {
+#rbwmxzkctk .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -771,13 +771,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#jlkqgvtowp .gt_column_spanner_outer:first-child {
+#rbwmxzkctk .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#jlkqgvtowp .gt_column_spanner_outer:last-child {
+#rbwmxzkctk .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#jlkqgvtowp .gt_column_spanner {
+#rbwmxzkctk .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -788,10 +788,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#jlkqgvtowp .gt_spanner_row {
+#rbwmxzkctk .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#jlkqgvtowp .gt_group_heading {
+#rbwmxzkctk .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -816,7 +816,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#jlkqgvtowp .gt_empty_group_heading {
+#rbwmxzkctk .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -830,13 +830,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#jlkqgvtowp .gt_from_md > :first-child {
+#rbwmxzkctk .gt_from_md > :first-child {
 margin-top: 0;
 }
-#jlkqgvtowp .gt_from_md > :last-child {
+#rbwmxzkctk .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#jlkqgvtowp .gt_row {
+#rbwmxzkctk .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -854,7 +854,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#jlkqgvtowp .gt_stub {
+#rbwmxzkctk .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -866,7 +866,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#jlkqgvtowp .gt_stub_row_group {
+#rbwmxzkctk .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -879,13 +879,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#jlkqgvtowp .gt_row_group_first td {
+#rbwmxzkctk .gt_row_group_first td {
 border-top-width: 2px;
 }
-#jlkqgvtowp .gt_row_group_first th {
+#rbwmxzkctk .gt_row_group_first th {
 border-top-width: 2px;
 }
-#jlkqgvtowp .gt_summary_row {
+#rbwmxzkctk .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -894,14 +894,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#jlkqgvtowp .gt_first_summary_row {
+#rbwmxzkctk .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_first_summary_row.thick {
+#rbwmxzkctk .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#jlkqgvtowp .gt_last_summary_row {
+#rbwmxzkctk .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -910,7 +910,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_grand_summary_row {
+#rbwmxzkctk .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -919,7 +919,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#jlkqgvtowp .gt_first_grand_summary_row {
+#rbwmxzkctk .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -928,7 +928,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_last_grand_summary_row_top {
+#rbwmxzkctk .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -937,10 +937,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_striped {
+#rbwmxzkctk .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#jlkqgvtowp .gt_table_body {
+#rbwmxzkctk .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -948,7 +948,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_footnotes {
+#rbwmxzkctk .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -961,7 +961,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_footnote {
+#rbwmxzkctk .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -969,7 +969,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#jlkqgvtowp .gt_sourcenotes {
+#rbwmxzkctk .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -982,64 +982,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#jlkqgvtowp .gt_sourcenote {
+#rbwmxzkctk .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#jlkqgvtowp .gt_left {
+#rbwmxzkctk .gt_left {
 text-align: left;
 }
-#jlkqgvtowp .gt_center {
+#rbwmxzkctk .gt_center {
 text-align: center;
 }
-#jlkqgvtowp .gt_right {
+#rbwmxzkctk .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#jlkqgvtowp .gt_font_normal {
+#rbwmxzkctk .gt_font_normal {
 font-weight: normal;
 }
-#jlkqgvtowp .gt_font_bold {
+#rbwmxzkctk .gt_font_bold {
 font-weight: bold;
 }
-#jlkqgvtowp .gt_font_italic {
+#rbwmxzkctk .gt_font_italic {
 font-style: italic;
 }
-#jlkqgvtowp .gt_super {
+#rbwmxzkctk .gt_super {
 font-size: 65%;
 }
-#jlkqgvtowp .gt_footnote_marks {
+#rbwmxzkctk .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#jlkqgvtowp .gt_asterisk {
+#rbwmxzkctk .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#jlkqgvtowp .gt_indent_1 {
+#rbwmxzkctk .gt_indent_1 {
 text-indent: 5px;
 }
-#jlkqgvtowp .gt_indent_2 {
+#rbwmxzkctk .gt_indent_2 {
 text-indent: 10px;
 }
-#jlkqgvtowp .gt_indent_3 {
+#rbwmxzkctk .gt_indent_3 {
 text-indent: 15px;
 }
-#jlkqgvtowp .gt_indent_4 {
+#rbwmxzkctk .gt_indent_4 {
 text-indent: 20px;
 }
-#jlkqgvtowp .gt_indent_5 {
+#rbwmxzkctk .gt_indent_5 {
 text-indent: 25px;
 }
-#jlkqgvtowp .katex-display {
+#rbwmxzkctk .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#jlkqgvtowp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rbwmxzkctk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -1067,54 +1067,54 @@ height: 0px !important;
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">2</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+    <tr><td headers="baker" class="gt_row gt_left">Luis</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Martha</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">4</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Martha</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">5</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Chetna</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">6</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Richard</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">7</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Chetna</td>
+    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Luis</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Richard</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">9</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Nancy</td>
 <td headers="series" class="gt_row gt_right">5</td>
 <td headers="episode" class="gt_row gt_right">10</td>
 <td headers="result" class="gt_row gt_left">WINNER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ugnė</td>
+    <tr><td headers="baker" class="gt_row gt_left">Marie</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Dorret</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ian</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">2</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Ian</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">3</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Paul</td>
+    <tr><td headers="baker" class="gt_row gt_left">Ian</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">4</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">5</td>
@@ -1123,42 +1123,42 @@ height: 0px !important;
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">6</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
+    <tr><td headers="baker" class="gt_row gt_left">Tamal</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">7</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">8</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Flora</td>
+    <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">9</td>
-<td headers="result" class="gt_row gt_left">OUT</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Nadiya</td>
 <td headers="series" class="gt_row gt_right">6</td>
 <td headers="episode" class="gt_row gt_right">10</td>
 <td headers="result" class="gt_row gt_left">WINNER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Selasi</td>
+    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Candice</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">2</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Val</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Tom</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Benjamina</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">4</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
+    <tr><td headers="baker" class="gt_row gt_left">Candice</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">5</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Tom</td>
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">6</td>
@@ -1171,130 +1171,130 @@ height: 0px !important;
 <td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">8</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jane</td>
-<td headers="series" class="gt_row gt_right">7</td>
-<td headers="episode" class="gt_row gt_right">9</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Andrew</td>
 <td headers="series" class="gt_row gt_right">7</td>
+<td headers="episode" class="gt_row gt_right">9</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Candice</td>
+<td headers="series" class="gt_row gt_right">7</td>
 <td headers="episode" class="gt_row gt_right">10</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">2</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Julia</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Kate</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">4</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Sophie</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">5</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Yan</td>
+    <tr><td headers="baker" class="gt_row gt_left">Liam</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">6</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Steven</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">7</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
+    <tr><td headers="baker" class="gt_row gt_left">Stacey</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Sophie</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">9</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Steven</td>
+    <tr><td headers="baker" class="gt_row gt_left">Sophie</td>
 <td headers="series" class="gt_row gt_right">8</td>
 <td headers="episode" class="gt_row gt_right">10</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Manon</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Jon</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Rahul</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">2</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Terry</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Rahul</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Dan</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">4</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
+    <tr><td headers="baker" class="gt_row gt_left">Kim-Joy</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">5</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Briony</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">6</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Rahul</td>
+    <tr><td headers="baker" class="gt_row gt_left">Kim-Joy</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">7</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Briony</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Ruby</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">9</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Kim-Joy</td>
+    <tr><td headers="baker" class="gt_row gt_left">Rahul</td>
 <td headers="series" class="gt_row gt_right">9</td>
 <td headers="episode" class="gt_row gt_right">10</td>
-<td headers="result" class="gt_row gt_left">Runner-up</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Henry</td>
+<td headers="result" class="gt_row gt_left">WINNER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Michelle</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">1</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Alice</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">2</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Henry</td>
+    <tr><td headers="baker" class="gt_row gt_left">Michael</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">3</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">Steph</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">4</td>
 <td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Helena</td>
+    <tr><td headers="baker" class="gt_row gt_left">Steph</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">5</td>
-<td headers="result" class="gt_row gt_left">OUT</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Alice</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steph</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">6</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Rosie</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Henry</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">7</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">David</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Steph</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">8</td>
-<td headers="result" class="gt_row gt_left">IN</td></tr>
-    <tr><td headers="baker" class="gt_row gt_left">Rosie</td>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
+    <tr><td headers="baker" class="gt_row gt_left">Alice</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">9</td>
-<td headers="result" class="gt_row gt_left">OUT</td></tr>
+<td headers="result" class="gt_row gt_left">STAR BAKER</td></tr>
     <tr><td headers="baker" class="gt_row gt_left">David</td>
 <td headers="series" class="gt_row gt_right">10</td>
 <td headers="episode" class="gt_row gt_right">10</td>
@@ -1304,6 +1304,46 @@ height: 0px !important;
   
 </table>
 </div>
+<p>In season 5 it looks like there was an upset because Richard won the
+last 3 episodes before the finale but Nancy took the cake
+<em>literally</em>. Nadiya powered through the last 3 episodes of season
+6 to become the winner. Rahul looks like he started strong and then lost
+some steam, but came back to win the season in the end. Season 10 was
+probably the most surprising because the winner, David, was never
+crowned star baker in an episode before the finale.</p>
+<p>Import, tidy, and wrangle the <em>viewers</em> data.</p>
+<pre class="r"><code>viewers_df = 
+  read_csv(&quot;data/viewers.csv&quot;, na = &quot;NA&quot;) |&gt;
+  janitor::clean_names() |&gt;
+  pivot_longer(
+    cols = series_1:series_10, 
+    names_to = &quot;series&quot;, 
+    values_to = &quot;viewership&quot;,
+    names_prefix = &quot;series_&quot;) |&gt;
+  drop_na()</code></pre>
+<pre><code>## Rows: 10 Columns: 11
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (11): Episode, Series 1, Series 2, Series 3, Series 4, Series 5, Series ...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>head(viewers_df, n=10)</code></pre>
+<pre><code>## # A tibble: 10 × 3
+##    episode series viewership
+##      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1       1 1            2.24
+##  2       1 2            3.1 
+##  3       1 3            3.85
+##  4       1 4            6.6 
+##  5       1 5            8.51
+##  6       1 6           11.6 
+##  7       1 7           13.6 
+##  8       1 8            9.46
+##  9       1 9            9.55
+## 10       1 10           9.62</code></pre>
+<p>The average viewership for season 1 was 2.77 and for season 5 was
+10.0393</p>
 </div>
 
 
